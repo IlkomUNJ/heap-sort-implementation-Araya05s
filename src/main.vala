@@ -18,13 +18,47 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+
+int[] maxheapify(int[] arr, int i){
+	int l = (i*2);
+	int r = (i*2)+1;
+	int largest = i;
+	int arraysize = arr.length;
+	if (l < arraysize && arr[l] > arr[i]){
+		largest = l;
+	}
+	if (r < arraysize && arr[r] > arr[i]){
+		largest = r;
+	}
+	if (largest != i){
+		swap(arr, i, largest);
+		maxheapify(arr, largest);
+	} 
+	return arr;
+}
+
+int[] swap(int[] arr, int x, int y){
+	int temp = arr[x];
+	arr[x] = arr[y];
+	arr[y] = temp;
+	return arr;
+}
+
+int[] buildMaxHeap(int[] arr){
+	int length = arr.length;
+	for (int i = length/2; i >= 0; i--){
+		maxheapify(arr, i);
+	}
+	return arr;
+}
+
 int main (string[] args)
 {
 	//stdout.printf ("Hello World\n");
 	//int[] arr = {4,1,3,2,16,9,10,14,8,7};
 	int[] arr = {16,4,10,14,7,9,3,2,8,1};
     //TODO: Complete heap sort 
-    int[] sarr = ..; 
+    int[] sarr = buildMaxHeap(arr); 
     printArr (sarr);
 	return 0;
 }
